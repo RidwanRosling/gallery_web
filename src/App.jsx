@@ -31,7 +31,19 @@ export default function App() {
         }
 
         const data = await response.json();
-        setPhotos(data.results);
+        const allPhotos = data.results;
+        const largePhotos = allPhotos.filter((p) => p.width > 700);
+        const first = largePhotos[0];
+        const last = largePhotos[1];
+
+        // Ambil 7 foto lainnya (bebas)
+        const middle = allPhotos
+          .filter(
+            (p) => p.width > 400 && p.id !== first?.id && p.id !== last?.id
+          )
+          .slice(0, 7);
+
+        setPhotos([first, ...middle, last]);
       } catch (error) {
         if (error.name === "AbortError") {
           // fetch will cancel, do nothing
@@ -59,56 +71,38 @@ export default function App() {
       {/* filter navbar */}
       <nav className="filter-navbar">
         <ul className="filter-navbar-list">
-          <li>
-            <button
-              onClick={() => setSearchTerm("mountain")}
-              className="button-filter"
-            >
-              Mountain
-            </button>
-          </li>
-          <li>
-            <button
-              className="button-filter"
-              onClick={() => setSearchTerm("beach")}
-            >
-              Beach
-            </button>
-          </li>
-          <li>
-            <button
-              className="button-filter"
-              onClick={() => setSearchTerm("forest")}
-            >
-              Forest
-            </button>
-          </li>
-          <li>
-            <button
-              className="button-filter"
-              onClick={() => setSearchTerm("desert")}
-            >
-              desert
-            </button>
-          </li>
+          {["mountain", "sea", "forest", "desert"].map((term) => (
+            <li key={term} className={searchTerm === term ? "active" : ""}>
+              <button
+                onClick={() => setSearchTerm(term)}
+                className="button-filter"
+              >
+                {term.charAt(0).toUpperCase() + term.slice(1)}
+              </button>
+            </li>
+          ))}
         </ul>
       </nav>
+
+      <hr className="line" />
 
       {/* result from the filter or search */}
       <div className="container">
         <div className="main-content">
-          {photos.map((photo, index) => (
-            <img
-              key={photo.id}
-              src={
-                index === 0 || index === 8
-                  ? photo.urls.regular
-                  : photo.urls.small
-              }
-              alt={photo.alt_description}
-              className={`photo-${index}`}
-            />
-          ))}
+          {photos.map((photo, index) =>
+            index === 8 && photo.width <= 700 ? null : (
+              <img
+                key={photo.id}
+                src={
+                  index === 0 || index === 8
+                    ? photo.urls.regular
+                    : photo.urls.small
+                }
+                alt={photo.alt_description}
+                className={`photo-${index}`}
+              />
+            )
+          )}
         </div>
       </div>
     </>

@@ -28,10 +28,41 @@ header {
 }
 
 .filter-navbar-list {
+  width: 100%;
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 10rem;
+  justify-content: space-evenly;
+}
+
+.filter-navbar-list li {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.filter-navbar-list li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #ce4f20;
+  transition: width 0.3s ease;
+}
+
+/* Saat tombol di-hover atau li di-hover */
+.filter-navbar-list li:hover::after,
+.filter-navbar-list li.active::after,
+.filter-navbar-list li:has(button:hover)::after {
+  width: 100%;
+}
+
+.filter-navbar-list li:hover,
+.filter-navbar-list li.active,
+.filter-navbar-list li:has(button:hover) {
+  color: #fff;
 }
 
 .button-filter {
@@ -39,6 +70,14 @@ header {
   background: none;
   cursor: pointer;
 }
+
+/* hr */
+
+.line {
+  width: 80%;
+  margin: 1rem auto 1rem auto;
+}
+/* hr end */
 
 .container {
   padding: 0;
@@ -48,6 +87,7 @@ header {
 }
 .main-content {
   display: grid;
+  gap: 0.5rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 150px);
   width: 100%;
@@ -55,10 +95,16 @@ header {
 
 /* Atur ukuran untuk semua gambar */
 .main-content img {
+  filter: grayscale(80%);
+
   width: 100%;
   height: 100%;
 }
 
+.main-content img:hover {
+  filter: grayscale(0%);
+  transition: 0.3s;
+}
 .photo-1 {
   grid-column: 3/4;
   grid-row: 1/2;
