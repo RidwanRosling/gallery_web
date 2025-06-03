@@ -44,7 +44,7 @@ export default function App() {
     fetchPhotos();
 
     return () => {
-      // cleanup: batalkan request sebelumnya jika searchTerm berubah
+      // cleanup
       controller.abort();
     };
   }, [searchTerm, accessKey]);
@@ -52,32 +52,64 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>Unsplash Photo Gallery</h1>
-        <p>Explore beautiful nature photos from Unsplash</p>
-        <input
-          type="text"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Cari foto..."
-        />
+        <h1 className="header-h1">OUR GALLERY</h1>
+        <p className="sub_title">This website just to practice my skill</p>
       </header>
 
-      <div
-        style={{
-          width: "800px",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "10px",
-        }}
-      >
-        {photos.length > 0 &&
-          photos.map((photo) => (
+      {/* filter navbar */}
+      <nav className="filter-navbar">
+        <ul className="filter-navbar-list">
+          <li>
+            <button
+              onClick={() => setSearchTerm("mountain")}
+              className="button-filter"
+            >
+              Mountain
+            </button>
+          </li>
+          <li>
+            <button
+              className="button-filter"
+              onClick={() => setSearchTerm("beach")}
+            >
+              Beach
+            </button>
+          </li>
+          <li>
+            <button
+              className="button-filter"
+              onClick={() => setSearchTerm("forest")}
+            >
+              Forest
+            </button>
+          </li>
+          <li>
+            <button
+              className="button-filter"
+              onClick={() => setSearchTerm("desert")}
+            >
+              desert
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      {/* result from the filter or search */}
+      <div className="container">
+        <div className="main-content">
+          {photos.map((photo, index) => (
             <img
               key={photo.id}
-              src={photo.urls.small}
+              src={
+                index === 0 || index === 8
+                  ? photo.urls.regular
+                  : photo.urls.small
+              }
               alt={photo.alt_description}
-              style={{ width: "200px", borderRadius: "10px" }}
+              className={`photo-${index}`}
             />
           ))}
+        </div>
       </div>
     </>
   );
