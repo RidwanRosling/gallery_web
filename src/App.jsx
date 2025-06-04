@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import NavFilter from "./components/NavFilter";
+import GalleryImages from "./components/GalleryImages";
+import Navbar from "./components/navbar";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,7 +14,7 @@ export default function App() {
 
     async function fetchPhotos() {
       if (!accessKey) {
-        console.error("Access Key tidak ditemukan! Pastikan .env sudah benar.");
+        console.error("Access Key tidak ditemukan!");
         return;
       }
 
@@ -63,48 +66,12 @@ export default function App() {
 
   return (
     <>
-      <header>
-        <h1 className="header-h1">OUR GALLERY</h1>
-        <p className="sub_title">This website just to practice my skill</p>
-      </header>
-
+      <Navbar setSearchTerm={setSearchTerm} />
       {/* filter navbar */}
-      <nav className="filter-navbar">
-        <ul className="filter-navbar-list">
-          {["mountain", "sea", "forest", "desert"].map((term) => (
-            <li key={term} className={searchTerm === term ? "active" : ""}>
-              <button
-                onClick={() => setSearchTerm(term)}
-                className="button-filter"
-              >
-                {term.charAt(0).toUpperCase() + term.slice(1)}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
+      <NavFilter searchTerm={searchTerm} changeSearchTerm={setSearchTerm} />
       <hr className="line" />
-
       {/* result from the filter or search */}
-      <div className="container">
-        <div className="main-content">
-          {photos.map((photo, index) =>
-            index === 8 && photo.width <= 700 ? null : (
-              <img
-                key={photo.id}
-                src={
-                  index === 0 || index === 8
-                    ? photo.urls.regular
-                    : photo.urls.small
-                }
-                alt={photo.alt_description}
-                className={`photo-${index}`}
-              />
-            )
-          )}
-        </div>
-      </div>
+      <GalleryImages photos={photos} />
     </>
   );
 }

@@ -1,13 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-header {
-  margin-top: 1rem;
+/* navbar section start */
+#navbar {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
   width: 100%;
-  height: 15vh;
+  height: 6vh;
+  background: #2f3640;
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  display: flex;
+  flex: 1; /* Tambahkan ini */
+
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.logo img {
+  object-fit: cover;
+  width: 8rem;
+  height: 5rem;
+}
+.nav-ul {
+  display: flex;
+  flex: 2;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.nav-ul li {
+  color: #fff;
+  font-size: large;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+  margin-right: 1.5rem;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.input-search {
+  width: 0;
+  padding: 0.5rem 2rem 0.5rem 0.8rem; /* Tambahkan padding kanan agar ada ruang untuk icon */
+  border: none;
+  border-radius: 1rem;
+  transition: width 0.4s ease;
+  background-color: white;
+  outline: none;
+  opacity: 0;
+}
+
+.search-wrapper:hover .input-search,
+.input-search:focus {
+  width: 200px;
+  opacity: 1;
+  box-shadow: 0 0 0.3rem #888;
+}
+
+.search-icon {
+  position: absolute;
+  right: 0.7rem;
+  color: #ffffff;
+  font-size: 2rem;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.search-wrapper:hover .search-icon,
+.input-search:focus + .search-icon {
+  color: black;
+  opacity: 1;
+}
+
+/* navbar section end */
+
+.title {
+  font-family: "allura";
+  text-align: center;
+  margin: 1rem 0 1rem 0;
 }
 
 .header-h1 {
@@ -66,6 +155,8 @@ header {
 }
 
 .button-filter {
+  font-family: "Montserrat", sans-serif;
+  font-size: large;
   border: none;
   background: none;
   cursor: pointer;
