@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import NavFilter from "./components/NavFilter";
 import GalleryImages from "./components/GalleryImages";
 import Navbar from "./components/navbar";
+import HeroSection from "./components/HeroSection";
+import CobaSvg from "./components/CobaSvg";
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("mountain");
   const [photos, setPhotos] = useState([]);
   const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
@@ -35,6 +37,11 @@ export default function App() {
 
         const data = await response.json();
         const allPhotos = data.results;
+
+        if (allPhotos.length === 0) {
+          setPhotos([]);
+          return;
+        }
         const largePhotos = allPhotos.filter((p) => p.width > 700);
         const first = largePhotos[0];
         const last = largePhotos[1];
@@ -66,12 +73,15 @@ export default function App() {
 
   return (
     <>
-      <Navbar setSearchTerm={setSearchTerm} />
+      <CobaSvg />
+      {/* <Navbar setSearchTerm={setSearchTerm} /> */}
+      {/* <CobaSvg /> */}
+      {/* <HeroSection /> */}
       {/* filter navbar */}
-      <NavFilter searchTerm={searchTerm} changeSearchTerm={setSearchTerm} />
-      <hr className="line" />
+      {/* <NavFilter searchTerm={searchTerm} changeSearchTerm={setSearchTerm} /> */}
+      {/* <hr className="line" /> */}
       {/* result from the filter or search */}
-      <GalleryImages photos={photos} />
+      {/* <GalleryImages photos={photos} /> */}
     </>
   );
 }

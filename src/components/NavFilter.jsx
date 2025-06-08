@@ -1,7 +1,9 @@
 export default function NavFilter({ searchTerm, changeSearchTerm }) {
   return (
     <>
-      <h1 className="title">Gallery</h1>
+      <h1 className="title" style={{ letterSpacing: "4px" }}>
+        Indonesia Nature
+      </h1>
 
       <nav className="filter-navbar">
         <ul className="filter-navbar-list">

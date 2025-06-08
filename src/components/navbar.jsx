@@ -16,7 +16,7 @@ export default function Navbar({ setSearchTerm }) {
         <img src={logo} alt="" />
       </div>
       <ul className="nav-ul">
-        <li className="link-nav">Home</li>
+        <li className="link-nav">Gallery</li>
         <li className="link-nav">Category</li>
         <li className="link-nav">contact</li>
       </ul>

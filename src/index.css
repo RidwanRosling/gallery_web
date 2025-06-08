@@ -90,13 +90,51 @@
   color: black;
   opacity: 1;
 }
-
 /* navbar section end */
+
+/* Header page */
+
+.header-container {
+  margin: 0 auto;
+  display: flex;
+  width: 80%;
+  height: 100vh;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header-text {
+  margin: 1rem 2rem 1rem 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.header-h1 {
+  letter-spacing: 4px;
+}
+.sub-header-p {
+  letter-spacing: 2px;
+}
+
+.header-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex: 2;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+/* Header page */
 
 .title {
   font-family: "allura";
   text-align: center;
-  margin: 1rem 0 1rem 0;
+  margin: 4rem 0 1rem 0;
 }
 
 .header-h1 {

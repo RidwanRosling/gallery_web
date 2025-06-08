@@ -1,4 +1,12 @@
 export default function GalleryImages({ photos }) {
+  if (photos.length === 0) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "20px", fontSize: "50px" }}>
+        <p>No photos available. Please try a different input.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <div className="main-content">
