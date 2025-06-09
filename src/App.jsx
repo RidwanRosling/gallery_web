@@ -6,7 +6,7 @@ import HeroSection from "./components/HeroSection";
 import CobaSvg from "./components/CobaSvg";
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState("mountain");
+  const [searchTerm, setSearchTerm] = useState("");
   const [photos, setPhotos] = useState([]);
   const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
@@ -27,7 +27,9 @@ export default function App() {
 
       try {
         const response = await fetch(
-          `https://api.unsplash.com/search/photos?query=${searchTerm}&per_page=9&client_id=${accessKey}`,
+          `https://api.unsplash.com/search/photos?query=terrestrial+ecosystem+${encodeURIComponent(
+            searchTerm
+          )}&per_page=9&client_id=${accessKey}`,
           { signal } // <- pass signal to fetch
         );
 
@@ -73,15 +75,15 @@ export default function App() {
 
   return (
     <>
-      <CobaSvg />
-      {/* <Navbar setSearchTerm={setSearchTerm} /> */}
+      {/* <CobaSvg setSearchTerm={setSearchTerm} searchTerm={searchTerm} /> */}
+      <Navbar setSearchTerm={setSearchTerm} />
       {/* <CobaSvg /> */}
-      {/* <HeroSection /> */}
+      <HeroSection />
       {/* filter navbar */}
-      {/* <NavFilter searchTerm={searchTerm} changeSearchTerm={setSearchTerm} /> */}
-      {/* <hr className="line" /> */}
+      <NavFilter searchTerm={searchTerm} changeSearchTerm={setSearchTerm} />
+      <hr className="line" />
       {/* result from the filter or search */}
-      {/* <GalleryImages photos={photos} /> */}
+      <GalleryImages photos={photos} />
     </>
   );
 }
